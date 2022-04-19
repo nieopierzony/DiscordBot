@@ -9,7 +9,7 @@ const { DISCORD_TOKEN } = process.env;
 
 const rest = new REST({ version: '9' }).setToken(DISCORD_TOKEN);
 const client = new Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS],
   partials: ['MESSAGE'],
 });
 
