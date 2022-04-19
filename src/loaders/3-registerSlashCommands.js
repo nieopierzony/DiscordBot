@@ -1,10 +1,11 @@
 'use strict';
 
 const { Routes } = require('discord-api-types/v9');
-const { CLIENT_ID, GUILD_ID } = process.env;
+const { CLIENT_ID, GUILD_ID, REGISTER_SLASHCOMMANDS } = process.env;
 
 module.exports = async ({ commands, slashCommandsRest }) => {
   try {
+    if (REGISTER_SLASHCOMMANDS === '0') return;
     console.log('\n[SlashCommands] Started refreshing application (/) commands.');
     const commandsData = commands
       .filter((command) => command.data.isSlashCommand)
