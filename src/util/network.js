@@ -2,7 +2,7 @@
 
 const http = require('node:http');
 const https = require('node:https');
-const tryFunction = require('./util/tryFunction');
+const tryFunction = require('./tryFunction');
 
 const makeRequestOptions = (url, options = {}) => {
   const { hostname, port, pathname, search } = new URL(url);
@@ -31,7 +31,7 @@ const fetch = (url, options = {}) => {
       const chunks = [];
       for await (const chunk of res) chunks.push(chunk);
       const rawResponse = Buffer.concat(chunks).toString();
-      const [err, json] = tryFunction(() => JSON.parse(rawResponse));
+      const [err, json] = await tryFunction(JSON.parse, rawResponse);
       if (err) return resolve(rawResponse);
       return resolve(json);
     });
