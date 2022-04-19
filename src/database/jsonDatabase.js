@@ -9,7 +9,6 @@ const defaultGuildConfig = {
 
 const getCurrentContent = () => {
   const exists = fs.existsSync(DB_FILENAME);
-  console.log(exists);
   if (exists) return JSON.parse(fs.readFileSync(DB_FILENAME, 'utf-8'));
   fs.writeFileSync(DB_FILENAME, '{}');
   return {};
@@ -19,7 +18,6 @@ const updateConfig = (newConfig) => fs.writeFileSync(DB_FILENAME, JSON.stringify
 
 const getGuild = (guildId) => {
   const config = getCurrentContent();
-  console.log(config);
   if (!config[guildId]) {
     config[guildId] = defaultGuildConfig;
     updateConfig(config);
