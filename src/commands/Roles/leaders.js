@@ -9,6 +9,7 @@ const { findPlayer } = require('../../util/playersApi');
 module.exports = {
   data: {
     name: 'leaders',
+    isGuildCommand: true,
     isSlashCommand: true,
     builtSlashCommand: new SlashCommandBuilder()
       .setName('leaders')

@@ -5,6 +5,7 @@ const fs = require('node:fs');
 const DB_FILENAME = 'database.json';
 const defaultGuildConfig = {
   leaderRoles: null,
+  commands: {},
 };
 
 const getCurrentContent = () => {
@@ -37,4 +38,18 @@ const getLeaderRoles = (guildId) => {
   return guildConfig.leaderRoles;
 };
 
-module.exports = { getCurrentContent, updateConfig, getGuild, updateGuild, getLeaderRoles };
+const getGuildCommands = () => {
+  const config = getCurrentContent();
+  const result = {};
+  for (const [guildId, data] of Object.entries(config)) {
+    if (!data.privateCommands) continue;
+    for (const [key, value] of Object.entries(data.privateCommands)) {
+      if (!value) continue;
+      if (!result[guildId]) result[guildId] = [];
+      result[guildId].push(key);
+    }
+  }
+  return result;
+};
+
+module.exports = { getCurrentContent, updateConfig, getGuild, updateGuild, getLeaderRoles, getGuildCommands };
