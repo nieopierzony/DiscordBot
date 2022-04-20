@@ -7,6 +7,8 @@ const errorMessage = (message) =>
   new MessageEmbed().setTitle('Произошла ошибка').setColor(constants.colors.red).setDescription(message);
 const formatReply = (data) =>
   data instanceof MessageEmbed ? { embeds: [data] } : typeof data === 'string' ? { content: data } : data;
+const log = ({ user, commandName, guild }) =>
+  console.log(`[InteractionCreate] ${user.tag} использовал команду /${commandName} на сервере "${guild.name}"`);
 
 module.exports = {
   type: 'interactionCreate',
@@ -15,12 +17,10 @@ module.exports = {
       if (!interaction.isCommand()) return;
       const command = client.commands.find((cmd) => cmd.data.name === interaction.commandName);
       if (!command) throw new Error('Команда не найдена');
+      log(interaction);
       const commandResult = await command.method(client, interaction);
       const formattedReply = formatReply(commandResult);
-      console.log(
-        `[InteractionCreate] ${interaction.user.tag} использовал команду ` +
-          `/${interaction.commandName} на сервере "${interaction.guild.name}"`,
-      );
+      if (!formattedReply) throw new Error('Нет ответа');
       interaction.reply(formattedReply);
     } catch (err) {
       console.error(`[Create interaction ERR] ${err}`);

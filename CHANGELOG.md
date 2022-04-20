@@ -2,6 +2,9 @@
 
 ## [Unreleased][unreleased]
 
+- Handle no-answer scenario in `interactionCreate` event
+- Separate `interactionCreate` log function from main code
+
 ## [1.1.1][] - 2022-04-20
 
 - Add using database to register private guild slash commands
