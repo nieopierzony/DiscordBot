@@ -6,6 +6,17 @@ const DB_FILENAME = 'database.json';
 const defaultGuildConfig = {
   leaderRoles: null,
   commands: {},
+  games: {
+    hangman: {
+      startChannelId: null,
+      logChannelId: null,
+      usePrivateThreads: true,
+      playCooldown: 10 * 60 * 1000,
+      players: {},
+      logs: [],
+      categories: [],
+    },
+  },
 };
 
 const getCurrentContent = () => {
