@@ -21,6 +21,7 @@ module.exports = {
         `[InteractionCreate] ${interaction.user.tag} использовал команду ` +
           `/${interaction.commandName} на сервере "${interaction.guild.name}"`,
       );
+      if (!formattedReply) throw new Error('Нет ответа');
       interaction.reply(formattedReply);
     } catch (err) {
       console.error(`[Create interaction ERR] ${err}`);
