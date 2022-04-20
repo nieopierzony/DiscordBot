@@ -34,6 +34,7 @@ const getGuild = (guildId) => {
     config[guildId] = defaultGuildConfig;
     updateConfig(config);
   }
+  config[guildId] = { defaultGuildConfig, ...config[guildId] };
   return config[guildId];
 };
 
