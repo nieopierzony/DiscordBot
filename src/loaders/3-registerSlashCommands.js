@@ -7,6 +7,7 @@ const { getGuildCommands } = require('../database');
 module.exports = async ({ commands, slashCommandsRest }) => {
   try {
     // TODO: Store last register in some file and diff date
+    // TODO: Add commands permissions from database
     if (REGISTER_SLASHCOMMANDS === '0') return;
     console.log('\n[SlashCommands] Started refreshing application (/) commands.');
     const slashCommands = commands.filter((command) => command.data.isSlashCommand);
