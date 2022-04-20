@@ -63,4 +63,56 @@ const getGuildCommands = () => {
   return result;
 };
 
-module.exports = { getCurrentContent, updateConfig, getGuild, updateGuild, getLeaderRoles, getGuildCommands };
+// TODO: Add more find filters
+const findGameLog = (gameName, guildId, { userId }) => {
+  try {
+    const guildConfig = getGuild(guildId);
+    const logs = guildConfig.games[gameName].logs;
+    return logs.filter((log) => log.playerId === userId);
+  } catch (err) {
+    return null;
+  }
+};
+
+const setGameValue = (gameName, guildId, value, data) => {
+  try {
+    const guildConfig = getGuild(guildId);
+    guildConfig.games[gameName][value] = data;
+    return true;
+  } catch (err) {
+    // TODO: Sync recursive objects with default config if not exists
+    return false;
+  }
+};
+
+const createGameLog = (gameName, guildid, data) => {
+  try {
+    const guildConfig = getGuild(guildid);
+    guildConfig.games[gameName].logs.push(data);
+    return true;
+  } catch (err) {
+    return false;
+  }
+};
+
+const getGuildGame = (gameName, guildId) => {
+  try {
+    const guildConfig = getGuild(guildId);
+    return guildConfig.games[gameName];
+  } catch (err) {
+    return null;
+  }
+};
+
+module.exports = {
+  getCurrentContent,
+  updateConfig,
+  getGuild,
+  updateGuild,
+  getLeaderRoles,
+  getGuildCommands,
+  findGameLog,
+  setGameValue,
+  createGameLog,
+  getGuildGame,
+};
