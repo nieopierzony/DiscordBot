@@ -4,6 +4,7 @@
 
 - Handle no-answer scenario in `interactionCreate` event
 - Separate `interactionCreate` log function from main code
+- Separate interaction types from one event in dedicated functions
 
 ## [1.1.1][] - 2022-04-20
 
