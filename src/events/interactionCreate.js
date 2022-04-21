@@ -8,6 +8,8 @@ const errorMessage = (message) =>
   new MessageEmbed().setTitle('Произошла ошибка').setColor(constants.colors.red).setDescription(message);
 const formatReply = (data) =>
   data instanceof MessageEmbed ? { embeds: [data] } : typeof data === 'string' ? { content: data } : data;
+const log = ({ user, commandName, guild }) =>
+  console.log(`[InteractionCreate] ${user.tag} использовал команду /${commandName} на сервере "${guild.name}"`);
 
 module.exports = {
   type: 'interactionCreate',
